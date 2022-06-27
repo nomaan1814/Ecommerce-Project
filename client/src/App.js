@@ -6,6 +6,9 @@ import HomeScreen from "./screen/HomeScreen";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import ProductDetails from "./screen/ProductDetails";
 import CartScreen from "./screen/CartScreen";
+import LoginScreen from "./screen/LoginScreen";
+import RegisterScreen from "./screen/RegisterScreen";
+import ProfileScreen from "./screen/ProfileScreen";
 function App() {
   return (
     <>
@@ -16,9 +19,12 @@ function App() {
             <h1>Ecommerce App</h1>
             <Routes>
               <Route path="/" element={<HomeScreen />} />
+              <Route path="/login" element={<LoginScreen />} />
+              <Route path="/register" element={<RegisterScreen />} />
               <Route path="/product/:id" element={<ProductDetails />} />
               <Route path="/cart/:id" element={<CartScreen />} />
               <Route path="/cart" element={<CartScreen />} />
+              <Route path="/profile" element={<ProfileScreen />} />
             </Routes>
           </Container>
         </main>
