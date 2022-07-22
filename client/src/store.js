@@ -13,6 +13,10 @@ const cartItemfromStorage = localStorage.getItem("cartItems")
   ? JSON.parse(localStorage.getItem("cartItems"))
   : [];
 
+const shippingAddressFromStorage=localStorage.getItem("shippingAddress")
+? JSON.parse(localStorage.getItem('shippingAddress')):[];
+  
+
 const reducer = combineReducers({
   productList: productListReducer,
   productDetails: productDetailsReducer,
@@ -20,12 +24,15 @@ const reducer = combineReducers({
   userLogin:userLoginReducer,
   userRegister:userRegisterReducer,
   userDetails:userDetailReducer,
-  userUpdateProfile:userUpdateProfileReducer
+  userUpdateProfile:userUpdateProfileReducer,
+ 
 });
 const init_state = {
   // cart: { cartItem: "techinfo" },
-  cart: { cartItem: cartItemfromStorage },
-  userLogin:{userInfo:userInfofromStorage}
+  cart: { cartItem: cartItemfromStorage,
+    shippingAddress:shippingAddressFromStorage },
+  userLogin:{userInfo:userInfofromStorage},
+ 
 };
 const middleware = [thunk]; //middleware is not single we can use multiple middleware that's why we take array here
 const store = createStore(
