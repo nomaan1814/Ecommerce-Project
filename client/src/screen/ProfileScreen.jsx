@@ -3,7 +3,7 @@ import {Link,useNavigate, useSearchParams} from 'react-router-dom';
 import {Form,Button,Row,Col,Container} from 'react-bootstrap';
 import Message from '../shared/Alerts';
 import Loader from '../shared/Loader';
-import { getUserDetails, register } from '../actions/userAction';
+import { getUserDetails, register,updateuserProfile } from '../actions/userAction';
 import FormContainer from '../shared/FormContainer';
 import { useDispatch, useSelector } from 'react-redux';
 import Alerts from '../shared/Alerts';
@@ -17,16 +17,17 @@ const ProfileScreen = () => {
     const dispatch=useDispatch()
     const userDetails=useSelector(state=>state.userDetails);
     const userLogin=useSelector(state=>state.userLogin);
-    const userInfo=userLogin;
+    const {userInfo}=userLogin;
     const {loading,user,error}=userDetails;
+    const userUpdateProfile=useSelector(state=>state.userUpdateProfile);
+    const {userDetup}=userUpdateProfile;
     const navigate=useNavigate();
-    console.log(user)
     useEffect(()=>{
         if(!userInfo){
               navigate('/login')
         }
         else{
-            if(!user.name){
+            if(!user?.name){
                dispatch(getUserDetails())
             }else{
                 setname(user.name);
@@ -34,7 +35,10 @@ const ProfileScreen = () => {
             }
         }
     },[navigate,userInfo,user,dispatch])
-
+    const submitHandler=(e)=>{
+         e.preventDefault();
+         dispatch(updateuserProfile({id:user._id,name,email,password}))
+    }
    
   return (
     <div>
@@ -43,10 +47,11 @@ const ProfileScreen = () => {
          {/* <FormContainer>      */}
             <h1>Update Information</h1>
             {error && <Alerts varient="danger">{error}</Alerts>}
+            {userDetup && <Message variant='success'>Profile Updated</Message>}
             {loading && <Loader />}
             {message && <Alerts varient="danger">{message}</Alerts>}
             {userInfo && <Alerts varient="danger">{userInfo.message}</Alerts>}
-            <Form>
+            <Form onSubmit={submitHandler}>
                 <Form.Group controlId='email'>
                     <Form.Label>Name</Form.Label>
                     <Form.Control type="text" placeholder="Enter Name" value={name} onChange={(e)=>{setname(e.target.value)}} />
@@ -63,7 +68,7 @@ const ProfileScreen = () => {
                     <Form.Label>Confirm Password</Form.Label>
                     <Form.Control type="password" placeholder="Confirm password" value={cpassword} onChange={(e)=>{setcPassword(e.target.value)}} />
                 </Form.Group>
-                <Button type="submit" varient="primary">Register</Button>
+                <Button type="submit" varient="primary">Update</Button>
             </Form>
             <Row>
                 <Col>
