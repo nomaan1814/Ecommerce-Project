@@ -26,7 +26,7 @@ const OrderSchema = mongoose.Schema(
         },
         Product: {
           type: mongoose.Schema.Types.ObjectId,
-          required: true,
+          // required: true,
           ref: "Product",
         },
       },
@@ -51,7 +51,7 @@ const OrderSchema = mongoose.Schema(
     },
     payment: {
       type: String,
-      required: true,
+      // required: true,
     },
     paymentResult: {
       id: {

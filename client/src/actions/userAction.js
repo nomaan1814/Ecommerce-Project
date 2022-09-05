@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { USER_LOGIN_FAIL, USER_LOGIN_REQUEST, USER_LOGIN_SUCCESS,USER_LOGOUT,USER_REGISTER_REQUEST,USER_REGISTER_SUCCESS,USER_REGISTER_FAIL, USER_DETAIL_REQUEST, USER_DETAIL_SUCCESS, USER_DETAIL_FAIL, USER_UPDATE_PROFILE_REQUEST, USER_UPDATE_PROFILE_SUCCESS, USER_UPDATE_PROFILE_FAIL } from '../constants/userConstants';
-export const logout=(dispatch)=>{
+export const logout=()=>(dispatch)=>{
     localStorage.removeItem('userInfo');
     dispatch({type:USER_LOGOUT})
 }
@@ -90,6 +90,7 @@ export const updateuserProfile=(user)=>async(dispatch,getState)=>{
             type:USER_UPDATE_PROFILE_SUCCESS,
             payload:data
         })
+        localStorage.setItem('userInfo',JSON.stringify(data))
       } catch (error) {
           dispatch({
             type:USER_UPDATE_PROFILE_FAIL,

@@ -7,6 +7,7 @@ import { getUserDetails, register,updateuserProfile } from '../actions/userActio
 import FormContainer from '../shared/FormContainer';
 import { useDispatch, useSelector } from 'react-redux';
 import Alerts from '../shared/Alerts';
+import { USER_LOGIN_SUCCESS } from '../constants/userConstants';
 const ProfileScreen = () => {
     const [email,setEmail]=useState('');
     const [password,setPassword]=useState('');

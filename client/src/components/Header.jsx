@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Navbar, Nav, Container,NavDropdown } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import {useDispatch,useSelector} from "react-redux";
@@ -6,10 +6,15 @@ import { logout } from "../actions/userAction";
 const Header = () => {
   const userLogin=useSelector(state=>state.userLogin);
   const {userInfo}=userLogin;
+  const userUpdate=useSelector(state=>state.userUpdateProfile)
+  const {userDetup}=userUpdate;
   const dispatch=useDispatch()
   const logoutHandler=()=>{
      dispatch(logout())
   }
+  useEffect(()=>{
+
+  },[userDetup])
   return (
     <>
       <Navbar bg="dark" expand="lg" variant="dark" collapseOnSelect>
